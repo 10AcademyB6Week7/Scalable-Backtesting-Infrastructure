@@ -11,7 +11,18 @@ def get_backtest_scene():
         end_data = request.form.get("end_data")
         indicator = request.form.get("indicator")
         parameter_range = request.form.get("headline")
-        return jsonify({"status": "success","file_path":'backtest running'})
+        return jsonify({"status": "success","message":'backtest running'})
+    else:
+            return{
+                "status": "error",
+                "message": f"{request.method} is not allowed"
+            }
+
+@app.route('/backtest_results', methods=['GET'])
+def backtest_results():
+    if request.method == 'GET':
+        backtests = "backtest results"
+        return jsonify({"status": "success","backtests_results":backtests})
     else:
             return{
                 "status": "error",
