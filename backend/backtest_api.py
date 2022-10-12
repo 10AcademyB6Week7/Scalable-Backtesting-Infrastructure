@@ -10,7 +10,7 @@ def get_backtest_scene():
         start_data = request.form.get("start_data")
         end_data = request.form.get("end_data")
         indicator = request.form.get("indicator")
-        parameter_range = request.form.get("headline")
+        parameter_range = request.form.get("parameter_range")
         return jsonify({"status": "success","message":'backtest running'})
     else:
             return{

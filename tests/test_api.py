@@ -15,7 +15,7 @@ def test_get_backtest_scene():
             "start_data": "test",
             "end_data": "test",
             "indicator":"test",
-            "headline":"test"
+            "parameter_range":"test"
         })
     client_response = client.post('/get_backtest_scene', headers={"Content-Type": "application/json"}, data=payload)
     assert b'success' in client_response.data
