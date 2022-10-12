@@ -14,7 +14,7 @@
 
 
 
-<img src="images/tech_stack.png" name="">
+<img src="images/tech_stack_.png" name="">
 <br />
 <p align="center">
   <h3 align="center">Algorithmic Trading: Automated Scalable Backtesting Infrastructure</h3>
