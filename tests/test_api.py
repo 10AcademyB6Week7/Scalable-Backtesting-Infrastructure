@@ -1,7 +1,7 @@
 from urllib import response
 import sys, json
 sys.path.insert(0,'../backend/')
-from backtest_api import app
+from backend.backtest_api import app
 
 client = app.test_client()
 
