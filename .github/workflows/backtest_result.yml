@@ -25,8 +25,7 @@ jobs:
           REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           # Post reports as comments in GitHub PRs
-          # Random Regression
-          echo "### Vecotorbt Plots" > report.md
+          echo "### Vecotorbt Result" > report.md
           cat backtest_result/vectorbt/fast_and_slow_plot.txt >> report.md
           
-          # cml-send-comment report.md
+          cml-send-comment report.md
