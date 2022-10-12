@@ -137,7 +137,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 <!-- CONTACT -->
 ## Contributors
-<a href = "https://github.com/Tanu-N-Prabhu/Python/graphs/contributors">
+<a href = "https://github.com/10AcademyB6Week7/Scalable-Backtesting-Infrastructure/graphs/contributors">
   <img src = "https://contrib.rocks/image?repo=10AcademyB6Week7/Scalable-Backtesting-Infrastructure"/>
 </a>
 
