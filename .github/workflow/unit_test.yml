@@ -1,4 +1,4 @@
-name: web3 dApp unit test
+name: unit test
 
 on:
   push:
