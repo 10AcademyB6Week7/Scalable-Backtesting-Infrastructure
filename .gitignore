@@ -5,7 +5,7 @@ __pycache__/
 
 # C extensions
 *.so
-
+data/BTC-USD.csv
 # Distribution / packaging
 .Python
 build/
