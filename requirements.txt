@@ -1,7 +1,5 @@
-flask
-flask-sqlalchemy
-flask-bcrypt
-flask-cors
-flask-session
-psycopg2-binary
-python-dotenv
+pandas
+matplotlib
+seaborn
+backtrader
+yfinance
