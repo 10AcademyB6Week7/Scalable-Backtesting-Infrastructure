@@ -63,6 +63,9 @@ class VectorbotPipeline():
             log_param("init_cash", self.init_cash)
             for k,v in self.pf.stats().to_dict():
                 log_param(k,v)
+
+        with open('./backtest_result/vectorbot/fast_and_slow_plot.txt','w') as f:
+            f.write(self.pf.stats().to_dict())
         return self.pf.stats().to_dict()
 
     # def plot_portfolio_summary(self):
@@ -79,7 +82,7 @@ class VectorbotPipeline():
 
 
 if __name__ == '__main__':
-    vbtp = VectorbotPipeline(is_experiment=True)
+    vbtp = VectorbotPipeline(is_experiment=False)
     vbtp.setup_sma()
     vbtp.readbale_records()
     vbtp.plot_fast_and_slow()
