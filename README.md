@@ -164,8 +164,8 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 👤 **Bekalu Tadele**
 
-- GitHub: [Bekalu Tadele](https://github.com/)
-- LinkedIn: [Bekalu Tadele](https://www.linkedin.com/in/)
+- GitHub: [Bekalu Tadele](https://github.com/BekaluTa)
+- LinkedIn: [Bekalu Tadele](https://www.linkedin.com/in/bekalu-tadele)
 
 👤 **Adijat Ojutomori**
 
