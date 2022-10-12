@@ -1,7 +1,7 @@
 from kafka import KafkaConsumer
 from json import loads
 
-def producer(group_id,topic,offset):
+def consumer(group_id,topic,offset):
     consumer = KafkaConsumer(
             topic,
             bootstrap_servers=['b-1.batch6w7.6qsgnf.c19.kafka.us-east-1.amazonaws.com:9092','b-2.batch6w7.6qsgnf.c19.kafka.us-east-1.amazonaws.com:9092'],
