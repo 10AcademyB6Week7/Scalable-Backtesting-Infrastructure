@@ -52,7 +52,7 @@ class VectorbotPipeline():
         self.calc_slow_ma.ma.vbt.plot(trace_kwargs=dict(name='Slow MA'), fig=fig)
         self.pf.positions.plot(close_trace_kwargs=dict(visible=False), fig=fig)
         # vbt.save('fig.png', fig)
-        with open('./images/vectorbot/fast_and_slow_plot.png','wb') as f:
+        with open('./images/vectorbt/fast_and_slow_plot.png','wb') as f:
             f.write(fig.to_image(format='png'))
         if self.is_experiment:
             mlflow.log_figure(fast_and_slow_plot, "fast_and_slow_plot.png")
@@ -64,8 +64,10 @@ class VectorbotPipeline():
             for k,v in self.pf.stats().to_dict():
                 log_param(k,v)
 
-        with open('./backtest_result/vectorbot/fast_and_slow_plot.txt','w') as f:
-            f.write(self.pf.stats().to_dict())
+        with open('./backtest_result/vectorbt/fast_and_slow_plot.txt','w') as f:
+            for key, value in self.pf.stats().to_dict().items(): 
+                f.write('%s: %s\n' % (key, value))
+            # f.write(self.pf.stats().to_dict())
         return self.pf.stats().to_dict()
 
     # def plot_portfolio_summary(self):

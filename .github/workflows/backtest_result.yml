@@ -20,7 +20,6 @@ jobs:
         run: |
           # Your ML workflow goes here
           pip install -r requirements.txt
-          # python training/train.py
       - name: Write CML report
         env:
           REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -28,6 +27,6 @@ jobs:
           # Post reports as comments in GitHub PRs
           # Random Regression
           echo "### Vecotorbt Plots" > report.md
-          cat train/results.txt >> report.md
+          cat backtest_result/vectorbt/fast_and_slow_plot.txt >> report.md
           
           # cml-send-comment report.md
