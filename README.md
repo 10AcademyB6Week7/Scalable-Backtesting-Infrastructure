@@ -153,7 +153,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 👤 **Henok Desalegn**
 
-- GitHub: [Henok Desalegn](https://github.com/)
+- GitHub: [Henok Desalegn](https://github.com/henokd11)
 - LinkedIn: [Henok Desalegn](https://www.linkedin.com/in/henok-desalegn/)
 
 👤 **Gedion Abebe**
