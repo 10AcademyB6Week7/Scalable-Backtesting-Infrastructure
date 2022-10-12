@@ -1,0 +1,15 @@
+artifact_uri: file:///home/natnael_melese/Scalable-Backtesting-Infrastructure/mlruns/16/7eaabb63f5944a9c8c38205ffa55a9bf/artifacts
+end_time: 1665614810428
+entry_point_name: ''
+experiment_id: '16'
+lifecycle_stage: active
+name: ''
+run_id: 7eaabb63f5944a9c8c38205ffa55a9bf
+run_uuid: 7eaabb63f5944a9c8c38205ffa55a9bf
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1665614800435
+status: 3
+tags: []
+user_id: natnael_melese
