@@ -1,6 +1,7 @@
 from dotenv import load_dotenv
 import os
 import redis
+from secrets import db
 
 load_dotenv()
 
@@ -9,7 +10,7 @@ class ApplicationConfig:
     SECRET_KEY = os.environ["SECRET_KEY"]
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SQLALCHEMY_ECHO = True
-    SQLALCHEMY_DATABASE_URI = "postgresql://benkartuser:benkartpass@melachallengedatabase.crlafpfc5g5y.us-east-1.rds.amazonaws.com:5432/benkartdb"
+    SQLALCHEMY_DATABASE_URI = db
     
     SESSION_TYPE = "redis"
     SESSION_PERMINENT = False
