@@ -1,4 +1,4 @@
-name: Scalable-Backtesting-Infrastructure
+name: test_kafka_containers
 
 on:
   push:

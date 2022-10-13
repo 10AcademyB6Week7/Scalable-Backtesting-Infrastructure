@@ -1,4 +1,4 @@
-name: Scalable-Backtesting-Infrastructure-Plot
+name: backtest_plot
 on: [push]
 jobs:
   run:

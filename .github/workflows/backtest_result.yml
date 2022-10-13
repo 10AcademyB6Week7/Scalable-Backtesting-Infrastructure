@@ -1,4 +1,4 @@
-name: Scalable-Backtesting-Infrastructure-Result
+name: backtest_result
 on: [push]
 jobs:
   run:
