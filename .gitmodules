@@ -1,0 +1,4 @@
+[submodule "Scalable-Backtesting-Infrastructure-Frontend"]
+	path = Scalable-Backtesting-Infrastructure-Frontend
+	url = https://github.com/10AcademyB6Week7/Scalable-Backtesting-Infrastructure-Frontend
+	branch = main
