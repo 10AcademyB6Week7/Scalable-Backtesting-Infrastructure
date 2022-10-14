@@ -88,10 +88,16 @@ class VectorbotPipeline():
                 f.write('%s: %s\n' % (key, value))
             # f.write(self.pf.stats().to_dict())
         return self.pf.stats().to_dict()
-    
+
+    def setup_bbands(self):
+        bbands = vbt.BBANDS.run(self.price)
+        entries = bbands.close_crossed_below(bbands.lower)
+        exits = bbands.close_crossed_above(bbands.upper)
+        self.pf = vbt.Portfolio.from_signals(self.price, entries, exits)
+
     def run_indicator(self):
-        if self.indicator == 'rsi':
-            pass
+        if self.indicator == 'bbands':
+            self.setup_bbands()
         elif self.indicator == 'sma':
             self.setup_sma()
 
