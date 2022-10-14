@@ -2,9 +2,18 @@ import vectorbt as vbt
 # from mlflow import log_metric, log_param, log_artifacts, log_params
 import mlflow
 import random
+from sqlalchemy import create_engine
+from dotenv import load_dotenv
+import os
+
+sys.path.append(os.path.abspath(os.path.join("./backend/")))
+from models import User, BackTestResult, BackTestScene
+
+load_dotenv()
 
 class VectorbotPipeline():
-    def __init__(self, init_cash=1000, stock='AMZN', fast_ma=10, slow_ma=50, start='2021-10-11', end='2022-10-11', period=None, fees=0.005, is_experiment=False):
+    def __init__(self,user_id, init_cash=1000, stock='AMZN', fast_ma=10, slow_ma=50, start='2021-10-11', end='2022-10-11', period=None, fees=0.005, is_experiment=False):
+        self.user_id = user_id
         self.init_cash = init_cash
         self.stock = stock
         self.fast_ma = fast_ma
@@ -74,6 +83,13 @@ class VectorbotPipeline():
             # f.write(self.pf.stats().to_dict())
         return self.pf.stats().to_dict()
 
+    def save_result_and_publish(self):
+        result_dict = self.return_backtest_result()
+        DB_URL = os.environ["DB_URL"]
+        sql_engine = create_engine(DB_URL)
+        
+
+
     # def plot_portfolio_summary(self):
     #     returns = self.price.vbt.to_returns()
     #     val = returns.vbt.returns.qs.html_report
@@ -88,13 +104,14 @@ class VectorbotPipeline():
 
 
 if __name__ == '__main__':
-    vbtp = VectorbotPipeline(is_experiment=True)
+    vbtp = VectorbotPipeline(12, is_experiment=False)
     vbtp.setup_sma()
-    vbtp.readbale_records()
-    vbtp.plot_fast_and_slow()
-    vbtp.return_backtest_result()
-    # vbtp.plot_portfolio_summary()
-    vbtp.setup_from_holding()
+    vbtp.save_result_and_publish()
     # vbtp.readbale_records()
-    vbtp.return_backtest_result()
+    # vbtp.plot_fast_and_slow()
+    # vbtp.return_backtest_result()
+    # vbtp.plot_portfolio_summary()
+    # vbtp.setup_from_holding()
+    # vbtp.readbale_records()
+    # vbtp.return_backtest_result()
 
