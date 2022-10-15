@@ -1,0 +1,7 @@
+schema-registry-start schema-registry.properties 
+$pwd_now=~/Scalable-Backtesting-Infrastructure/kafa-connect
+connect-standalone ~/confluent-6.2.1/etc/schema-registry/connect-avro-standalone.properties $pwd_now/k2.properties
+
+kafka-avro-console-producer  --bootstrap-server b-1.batch6w7.6qsgnf.c19.kafka.us-east-1.amazonaws.com:9092,b-2.batch6w7.6qsgnf.c19.kafka.us-east-1.amazonaws.com:9092 --topic g2-test_topic --property value.schema='{ "type": "record", "name": "backtestScene", "fields": [ { "name": "user_id", "type": "int", "default": -1 }, { "name": "coin_name", "type": "string", "default": -1 },  { "name": "sma_value", "type": "string","default":"NONE" }, { "name": "fma_value", "type": "string", "default": "NONE" }, { "name": "initial_cash", "type": "int", "default": "NONE" }, { "name": "fee", "type": "int", "default": "NONE" } ] }'  --property schema.registry.url=http://localhost:6000
+
+{"user_id":1,"coin_name":"BTC-USD","sma_value":"20","fma_value":"5","initial_cash":1000,"fee":0.05}

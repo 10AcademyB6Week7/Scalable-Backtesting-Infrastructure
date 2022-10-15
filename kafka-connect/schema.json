@@ -1,0 +1,50 @@
+{
+    "type": "record",
+    "name": "backtestScene",
+    "fields": [
+        {
+            "name": "user_id",
+            "type": "int",
+            "default": -1
+        },
+        {
+            "name": "coin_name",
+            "type": "string",
+            "default": -1
+        },
+        {
+            "name": "start_date",
+            "type": "int",
+            "logicalType": "date"
+        },
+        {
+            "name": "end_date",
+            "type": "int",
+            "logicalType": "date"
+        },
+        {
+            "name": "sma_value",
+            "type": {
+                "type": "int",
+                "logicalType": "date"
+            }
+        },
+        {
+            "name": "fma_value",
+            "type": "string",
+            "default": "NONE"
+        },
+        {
+            "name": "initial_cash",
+            "type": "int",
+            "default": "NONE"
+        },
+        {
+            "name": "fee",
+            "type": "int",
+            "default": "NONE"
+        }
+    ]
+}
+
+    
