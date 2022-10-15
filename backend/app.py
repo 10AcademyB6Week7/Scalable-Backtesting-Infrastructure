@@ -6,6 +6,9 @@ from flask_bcrypt import Bcrypt
 from flask.json import jsonify
 from flask_session import Session
 from flask_cors import CORS, cross_origin
+import logging
+
+logging.basicConfig(filename='../log/log.log', filemode='a',encoding='utf-8', level=logging.DEBUG)
 
 
 app = Flask(__name__)

@@ -3,10 +3,12 @@ from urllib import response
 from flask import *
 import os
 import sys
+import logging
 sys.path.insert(0,'../scripts/')
 from kafka_producer import producer
 from kafka_consumer import consumer
 
+logging.basicConfig(filename='../log/log.log', filemode='a',encoding='utf-8', level=logging.DEBUG)
 app = Flask(__name__)
 
 @app.route('/get_backtest_scene', methods=['POST'])
@@ -17,9 +19,10 @@ def get_backtest_scene():
         start_date = request.form.get("start_date")
         end_date = request.form.get("end_date")
         sma_value = request.form.get("sma_value")
+        fma_value = request.form.get("fma_value")
         inital_cash = request.form.get("inital_cash")
         fee = request.form.get("end_date")
-        backtest_scene = {"user_ID":user_ID,"coin_name":coin_name,"start_date":start_date,"end_date":end_date,"sma_value":sma_value,"inital_cash":inital_cash,"fee":fee}
+        backtest_scene = {"user_ID":user_ID,"coin_name":coin_name,"start_date":start_date,"end_date":end_date,"sma_value":sma_value,"fma_value":fma_value,"inital_cash":inital_cash,"fee":fee}
         producer('backtest_scene','g2-backtest_requests',backtest_scene)
         return jsonify({"status": "success","message":'backtest running'})
     else:
