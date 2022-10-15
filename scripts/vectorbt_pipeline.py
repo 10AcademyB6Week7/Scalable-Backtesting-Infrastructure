@@ -137,7 +137,7 @@ class VectorbotPipeline():
             producer = KafkaProducer(
                 bootstrap_servers=['b-1.batch6w7.6qsgnf.c19.kafka.us-east-1.amazonaws.com:9092','b-2.batch6w7.6qsgnf.c19.kafka.us-east-1.amazonaws.com:9092'],
                 client_id='g2-result-producer',value_serializer=lambda x: dumps(x).encode('utf-8'))
-            producer.send(f"g2-backtest-result-{self.user_id}",{"backtest_result_id":backtest_result.id}).get(timeout=30)
+            producer.send(f"{self.user_id}",{"backtest_result_id":backtest_result.id}).get(timeout=30)
         else:
             raise Exception("User not found")
 
