@@ -6,11 +6,15 @@ from sqlalchemy import create_engine, select
 from dotenv import load_dotenv
 import os, sys
 from sqlalchemy.orm import Session
-sys.path.append(os.path.abspath(os.path.join("./backend/")))
+sys.path.append(os.path.abspath(os.path.join("../backend/")))
+sys.path.append(os.path.abspath(os.path.join("../scripts/")))
+from create_kafka_topics import create_topics
+from kafka_producer import producer
 from models import User, BackTestResult, BackTestScene
 from kafka import KafkaAdminClient
 from kafka import KafkaConsumer
 from kafka import KafkaProducer
+from json import dumps
 
 
 load_dotenv()
@@ -83,7 +87,7 @@ class VectorbotPipeline():
             for k,v in self.pf.stats().to_dict().items():
                 mlflow.log_param(str(k).replace('%','').replace('[','').replace(']',''),str(v))
 
-        with open('./backtest_result/vectorbt/fast_and_slow_plot.txt','w') as f:
+        with open('../backtest_result/vectorbt/fast_and_slow_plot.txt','w') as f:
             for key, value in self.pf.stats().to_dict().items(): 
                 f.write('%s: %s\n' % (key, value))
             # f.write(self.pf.stats().to_dict())
@@ -137,7 +141,13 @@ class VectorbotPipeline():
             producer = KafkaProducer(
                 bootstrap_servers=['b-1.batch6w7.6qsgnf.c19.kafka.us-east-1.amazonaws.com:9092','b-2.batch6w7.6qsgnf.c19.kafka.us-east-1.amazonaws.com:9092'],
                 client_id='g2-result-producer',value_serializer=lambda x: dumps(x).encode('utf-8'))
-            producer.send(f"{self.user_id}",{"backtest_result_id":backtest_result.id}).get(timeout=30)
+            client = KafkaAdminClient(
+            bootstrap_servers = ['b-1.batch6w7.6qsgnf.c19.kafka.us-east-1.amazonaws.com:9092','b-2.batch6w7.6qsgnf.c19.kafka.us-east-1.amazonaws.com:9092'],
+            api_version=(0,11,5),)
+            if str(self.user_id) not in client.list_topics():
+                create_topics([self.user_id])
+            producer.send(str(self.user_id),{"backtest_scene_id":backtest_result.backtest_scene_id}).get(timeout=30)
+           
         else:
             raise Exception("User not found")
 

@@ -1,8 +1,6 @@
 from kafka import KafkaAdminClient 
 from kafka.admin import NewTopic
-import logging
 
-logging.basicConfig(filename='../log/log.log', filemode='a',encoding='utf-8', level=logging.DEBUG)
 
 
 def create_topics(topic_list):
