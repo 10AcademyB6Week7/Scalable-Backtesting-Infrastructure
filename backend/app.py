@@ -123,16 +123,18 @@ def logout_user():
 @app.route('/dashboard',methods=["POST"])
 def dashboard():
     try:
-        user_id = session.get("user_id")
-        user_role = session.get("user_role")
+        # user_id = session.get("user_id")
+        # user_role = session.get("user_role")
+        user_id = request.json['user_id']
         
         if not user_id :
-            return jsonify({"error": "Unauthorized"}), 401
+            return jsonify({"success": False,"error": "Unauthorized"}), 401
         if user_role == "normal":
-            return jsonify({"error": "Unauthorized"}), 401
+            return jsonify({"success": False,"error": "Unauthorized"}), 401
         
         user = User.query.filter_by(id=user_id).first()
         return jsonify({
+            "success": True,
             "id": user.id,
             "email": user.email,
             "user_role": user.user_role,
