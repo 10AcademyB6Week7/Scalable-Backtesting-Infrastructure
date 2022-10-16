@@ -99,7 +99,17 @@
 ```bash
 git clone https://github.com/10AcademyB6Week7/Scalable-Backtesting-Infrastructure.git
 cd Scalable-Backtesting-Infrastructure
-sudo python3 setup.py install
+pip install -r requirements.txt
+python3 backend/app.py
+```
+
+
+## Frontend usage guide
+```bash
+git clone https://github.com/10AcademyB6Week7/Scalable-Backtesting-Infrastructure-Frontend.git
+cd Scalable-Backtesting-Infrastructure-Frontend
+npm install --legacy-peer-deps
+npm start
 ```
 
 
