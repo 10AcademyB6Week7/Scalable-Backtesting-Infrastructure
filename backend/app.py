@@ -1,11 +1,16 @@
 from flask import Flask, request,session 
 #  ,abort 
-from models import db, User
+from models import db, User, BackTestScene, BackTestResult
 from config import ApplicationConfig
 from flask_bcrypt import Bcrypt
 from flask.json import jsonify
 from flask_session import Session
 from flask_cors import CORS, cross_origin
+import os, sys
+
+sys.path.append(os.path.abspath(os.path.join("./scripts/")))
+
+from vectorbt_pipeline import VectorbotPipeline
 
 
 app = Flask(__name__)
@@ -133,6 +138,88 @@ def dashboard():
             "user_role": user.user_role,
             
         })
+    except Exception as e:
+        return jsonify({
+            "success": False,
+            "error": str(e)
+        })
+
+
+@app.route('/get_backtest_scene', methods=['POST'])
+def get_backtest_scene():
+    try:
+        if request.method == 'POST':
+            start_date = request.json["start_date"]
+            end_date = request.json["end_date"]
+            indicator = request.json["indicator"]
+            initial_cash = request.json['initial_cash']
+            stock = request.json['stock']
+            user_id = request.json['user_id']
+            print(start_date)
+            print(end_date)
+            print(indicator)
+            print(initial_cash)
+            print(stock)
+            print(user_id)
+            vectorbt_pipeline = VectorbotPipeline(
+                user_id, indicator=indicator,
+                init_cash=initial_cash,
+                stock=stock,
+                start=start_date,
+                end=end_date
+            )
+            vectorbt_pipeline.run_indicator()
+            vectorbt_pipeline.save_result_and_publish()
+
+            return jsonify({"success": True,"message":'Backtest running, go to history to see results'})
+        else:
+            return jsonify({
+                "success": False,
+                "error": f"{request.method} is not allowed"
+            })
+    except Exception as e:
+        return jsonify({
+            "success": False,
+            "error": str(e)
+        })
+
+@app.route('/backtest_results', methods=['POST'])
+def backtest_results():
+    try:
+        if request.method == 'POST':
+            user_id = request.json['user_id']
+            backtests = []
+            user = User.query.filter_by(id=user_id).first()
+            if user:
+                backtest_scenes = BackTestScene.query.filter_by(user_id=user_id)
+                for scene in backtest_scenes:
+                    scene_result = BackTestResult.query.filter_by(backtest_scene_id=scene.id).first()
+                    backtests.append({
+                        "start_date": scene.start_date,
+                        "end_date": scene.end_date,
+                        "initial_cash": scene.initial_cash,
+                        "start_date": scene.start_date,
+                        "result": {
+                            "returns": scene_result.returns,
+                            "number_of_trades": scene_result.number_of_trades,
+                            "winning_trades": scene_result.winning_trades,
+                            "losing_trades": scene_result.losing_trades,
+                            "max_drawdown": scene_result.max_drawdown,
+                            "sharpe_ratio": scene_result.sharpe_ratio,
+                        }
+                    })
+
+                return jsonify({"success": True, "backtests_results":backtest_scenes.start_date})
+            else:
+                return jsonify({
+                    "success": False,
+                    "error": "Invalid userID"
+                })
+        else:
+            return jsonify({
+                "success": False,
+                "error": f"{request.method} is not allowed"
+            })
     except Exception as e:
         return jsonify({
             "success": False,
