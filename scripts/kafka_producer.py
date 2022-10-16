@@ -1,5 +1,8 @@
 from kafka import KafkaProducer
 from json import dumps
+import logging
+
+logging.basicConfig(filename='../log/log.log', filemode='a',encoding='utf-8', level=logging.DEBUG)
 
 def producer(client_id,topic,data):
 

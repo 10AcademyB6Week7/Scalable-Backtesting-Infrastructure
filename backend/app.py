@@ -11,6 +11,9 @@ from sqlalchemy import desc
 sys.path.append(os.path.abspath(os.path.join("./scripts/")))
 
 from vectorbt_pipeline import VectorbotPipeline
+import logging
+
+logging.basicConfig(filename='../log/log.log', filemode='a',encoding='utf-8', level=logging.DEBUG)
 
 
 app = Flask(__name__)

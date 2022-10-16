@@ -1,5 +1,8 @@
 from kafka import KafkaConsumer
 from json import loads
+import logging
+
+logging.basicConfig(filename='../log/log.log', filemode='a',encoding='utf-8', level=logging.DEBUG)
 
 def consumer(group_id,topic,offset):
     consumer = KafkaConsumer(
