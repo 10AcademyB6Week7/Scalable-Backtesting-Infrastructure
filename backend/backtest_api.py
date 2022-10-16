@@ -4,7 +4,7 @@ from flask import *
 import os
 import sys
 import logging
-sys.path.insert(0,'../scripts/')
+sys.path.insert(0,'./scripts/')
 from kafka_producer import producer
 from kafka_consumer import consumer
 
