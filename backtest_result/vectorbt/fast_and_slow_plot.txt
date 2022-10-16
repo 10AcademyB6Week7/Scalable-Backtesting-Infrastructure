@@ -1,28 +1,28 @@
-Start: 2022-10-04 00:00:00+00:00
+Start: 2021-10-13 00:00:00+00:00
 End: 2022-10-14 00:00:00+00:00
-Period: 11 days 00:00:00
-Start Value: 1000.0
-End Value: 1000.0
-Total Return [%]: 0.0
-Benchmark Return [%]: -5.660600603276988
-Max Gross Exposure [%]: 0.0
+Period: 367 days 00:00:00
+Start Value: 100.0
+End Value: 55.640967385078795
+Total Return [%]: -44.359032614921205
+Benchmark Return [%]: -66.57615092154768
+Max Gross Exposure [%]: 100.0
 Total Fees Paid: 0.0
-Max Drawdown [%]: nan
-Max Drawdown Duration: NaT
-Total Trades: 0
-Total Closed Trades: 0
+Max Drawdown [%]: 58.10811902846581
+Max Drawdown Duration: 328 days 00:00:00
+Total Trades: 4
+Total Closed Trades: 4
 Total Open Trades: 0
 Open Trade PnL: 0.0
-Win Rate [%]: nan
-Best Trade [%]: nan
-Worst Trade [%]: nan
-Avg Winning Trade [%]: nan
-Avg Losing Trade [%]: nan
-Avg Winning Trade Duration: NaT
-Avg Losing Trade Duration: NaT
-Profit Factor: nan
-Expectancy: nan
-Sharpe Ratio: inf
-Calmar Ratio: nan
-Omega Ratio: inf
-Sortino Ratio: inf
+Win Rate [%]: 25.0
+Best Trade [%]: 7.150725486694324
+Worst Trade [%]: -23.009062036454637
+Avg Winning Trade [%]: 7.150725486694324
+Avg Losing Trade [%]: -19.57155764502705
+Avg Winning Trade Duration: 24 days 00:00:00
+Avg Losing Trade Duration: 55 days 08:00:00
+Profit Factor: 0.07724231257306795
+Expectancy: -11.089758153730301
+Sharpe Ratio: -0.9322371737377535
+Calmar Ratio: -0.7603237881820223
+Omega Ratio: 0.8256952197617339
+Sortino Ratio: -1.1954937918274253

@@ -110,14 +110,14 @@ class VectorbotPipeline():
         user = session.query(User).filter_by(id=self.user_id).first()
 
         if user:
-            backtest_scene = BackTestScene(coin_name="BTC",
-                start_date=self.start_date,
-                end_date=self.end_date,
+            backtest_scene = BackTestScene(coin_name=self.stock,
+                start_date=self.start,
+                end_date=self.end,
                 ema_value=self.ema_value,
                 sma_value=self.slow_ma,
                 fma_value=self.fast_ma,
-                initial_cash=self.init_cash,
-                fee=self.fee,
+                initial_cash=str(self.init_cash),
+                fee=self.fees,
                 user_id=user.id
             )
 
@@ -134,10 +134,10 @@ class VectorbotPipeline():
             )
             session.add(backtest_result)
             session.commit()
-            producer = KafkaProducer(
-                bootstrap_servers=['b-1.batch6w7.6qsgnf.c19.kafka.us-east-1.amazonaws.com:9092','b-2.batch6w7.6qsgnf.c19.kafka.us-east-1.amazonaws.com:9092'],
-                client_id='g2-result-producer',value_serializer=lambda x: dumps(x).encode('utf-8'))
-            producer.send(f"g2-backtest-result-{self.user_id}",{"backtest_result_id":backtest_result.id}).get(timeout=30)
+            # producer = KafkaProducer(
+            #     bootstrap_servers=['b-1.batch6w7.6qsgnf.c19.kafka.us-east-1.amazonaws.com:9092','b-2.batch6w7.6qsgnf.c19.kafka.us-east-1.amazonaws.com:9092'],
+            #     client_id='g2-result-producer',value_serializer=lambda x: dumps(x).encode('utf-8'))
+            # producer.send(f"{self.user_id}",{"backtest_result_id":backtest_result.id}).get(timeout=30)
         else:
             raise Exception("User not found")
 

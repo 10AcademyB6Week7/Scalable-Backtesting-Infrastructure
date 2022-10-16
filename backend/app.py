@@ -7,7 +7,7 @@ from flask.json import jsonify
 from flask_session import Session
 from flask_cors import CORS, cross_origin
 import os, sys
-
+from sqlalchemy import desc
 sys.path.append(os.path.abspath(os.path.join("./scripts/")))
 
 from vectorbt_pipeline import VectorbotPipeline
@@ -163,7 +163,7 @@ def get_backtest_scene():
             print(user_id)
             vectorbt_pipeline = VectorbotPipeline(
                 user_id, indicator=indicator,
-                init_cash=initial_cash,
+                init_cash=int(initial_cash),
                 stock=stock,
                 start=start_date,
                 end=end_date
@@ -191,14 +191,15 @@ def backtest_results():
             backtests = []
             user = User.query.filter_by(id=user_id).first()
             if user:
-                backtest_scenes = BackTestScene.query.filter_by(user_id=user_id)
+                backtest_scenes = BackTestScene.query.filter_by(user_id=user_id).order_by(desc(BackTestScene.id))
                 for scene in backtest_scenes:
                     scene_result = BackTestResult.query.filter_by(backtest_scene_id=scene.id).first()
                     backtests.append({
+                        "id":scene.id,
                         "start_date": scene.start_date,
+                        "coin_name": scene.coin_name,
                         "end_date": scene.end_date,
                         "initial_cash": scene.initial_cash,
-                        "start_date": scene.start_date,
                         "result": {
                             "returns": scene_result.returns,
                             "number_of_trades": scene_result.number_of_trades,
@@ -208,8 +209,9 @@ def backtest_results():
                             "sharpe_ratio": scene_result.sharpe_ratio,
                         }
                     })
+                # backtests = backtests.reverse()
 
-                return jsonify({"success": True, "backtests_results":backtest_scenes.start_date})
+                return jsonify({"success": True, "backtests_results":backtests})
             else:
                 return jsonify({
                     "success": False,
